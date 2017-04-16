@@ -2,14 +2,15 @@
  * food.h
  *
  *  Created on: Apr 14, 2017
- *      Author: Sam
+ *      Author: samsi
  */
 
 #ifndef FOOD_H_
 #define FOOD_H_
 
-#include <string>
 #include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -30,10 +31,11 @@ class Food
 
 	public:
 		/* 	Constructor	 	*/
+		Food();
 		Food(string aName, double aPrice, string aFoodType, bool aSpecial);
 
 		/* 	Accessor Methods	 	*/
-		double getName();
+		string getName();
 		double getPrice();
 		string getFoodType();
 		bool isSpecial();

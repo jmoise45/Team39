@@ -2,7 +2,7 @@
  * food.cpp
  *
  *  Created on: Apr 14, 2017
- *      Author: Sam
+ *      Author: samsi
  */
 
 #include <string>
@@ -13,12 +13,26 @@
 using namespace std;
 
 
+Food::Food()
+{
+	this->name = "NULL";
+	this->price = 0.0;
+	this->foodType = "NULL";
+	this->special = false;
+}
+
+
 Food::Food(string aName, double aPrice, string aFoodType, bool aSpecial)
 {
 	this->name = aName;
 	this->price = aPrice;
 	this->foodType = aFoodType;
 	this->special = aSpecial;
+}
+
+string Food::getName()
+{
+	return this->name;
 }
 
 double Food::getPrice()
@@ -40,5 +54,6 @@ void Food::setFoodType(string aFoodType)
 {
 	this->foodType = aFoodType;
 }
+
 
 

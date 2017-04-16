@@ -11,42 +11,16 @@
 
 #include "stack.h"
 #include "food.h"
+#include "menu.h"
+
+using namespace std;
 
 
-/*
- *  ==========================================================
- * 		Menu Class Declarations
- * ==========================================================
- 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 */
-
-class Menu
+Menu::Menu()
 {
-	private:
-		vector <Food> menuItems;
-		string chosenFood;
-		LinkedList guestNames;
-		int numGuests;
-		double currentBudget;
-
-	public:
-		/* 	Constructor	 	*/
-		Menu(LinkedList guestNames, int numGuests, double currentBudget);
-		Menu(int numGuests, double currentBudget);
-
-		/* 	Accessor Methods	 	*/
-		vector <Food> getMenuItems();
-		string getChosenFood();
-		double getCurrentBudget();
-
-		/* 	Mutator Methods	 	*/
-		void setMenuItem(Food aMenuItem, int pos);
-		void setChosenFood(string aChosenFood);
-
-		/* Usefull methods			*/
-		void initializeMenuItems();
-		double updateBudget();
-};
-
+	this->numGuests = 0;
+	this->currentBudget = 0.0;
+}
 
 
 /* 	Constructor	 	*/
@@ -74,16 +48,30 @@ vector <Food> Menu::getMenuItems()
 	return this->menuItems;
 }
 
-string Menu::getChosenFood()
-{
-	return this->chosenFood;
-}
-
 double Menu::getCurrentBudget()
 {
 	return this->currentBudget;
 }
 
+Food Menu::getChosenAppetizer()
+{
+	return this->chosenAppetizer;
+}
+
+Food Menu::getChosenEntree()
+{
+	return this->chosenEntree;
+}
+
+Food Menu::getChosenDessert()
+{
+	return this->chosenDessert;
+}
+
+Food Menu::getChosenSide()
+{
+	return this->chosenSide;
+}
 
 
 /* ----------------------------------------------------------------------------
@@ -94,14 +82,6 @@ void Menu::setMenuItem(Food aMenuItem, int pos)
 	this->menuItems[pos] = aMenuItem;
 }
 
-void Menu::setChosenFood(string aChosenFood)
-{
-	this->chosenFood = aChosenFood;
-}
-
-
-
-
 /* ----------------------------------------------------------------------------
  * 		Useful Methods
  * ----------------------------------------------------------------------------				*/
@@ -109,39 +89,160 @@ void Menu::setChosenFood(string aChosenFood)
 /* Initializes the menu to the default items				*/
 void Menu::initializeMenuItems()
 {
-	Food foods[] = {
-			//Entrees
-			Food("Hamburger", 7.00, "Entree", false), Food("Cheeseburger", 7.50, "Entree", false),
-			Food("Tilapia", 12.00, "Entree", true), Food("Chicken Wings (6)", 7.00, "Entree", false),
-			Food("Steak", 13.00, "Entree", false), Food("Sushi Sampler", 14.00, "Entree", false),
-			Food("Pizza", 9.00, "Entree", false), Food("Special Quesadilla", 12.00, "Entree", true),
-
-			//Appetizers
-			Food("House Salad", 10.00, "Appetizer", true), Food("Mozzarella Sticks", 7.00, "Appetizer", false),
-			Food("Ceaser Salad", 11.00, "Appetizer", false), Food("Soup of the Day", 3.00, "Appetizer", true),
-
-			//Desserts
-			Food("Chocolate Ice Cream", 3.00, "Dessert", false), Food("Vanilla Ice Cream", 3.00, "Appetizer", false),
-
-			//Sides
-			Food("French Fries", 2.00, "Side", false), Food("Onion Rings", 2.50, "Side", true)};
+	//Appetizers
+	(this->menuItems).push_back(Food("House Salad", 10.00, "Appetizer", true));
+	(this->menuItems).push_back(Food("Mozzarella Sticks", 7.00, "Appetizer", false));
+	(this->menuItems).push_back(Food("Ceaser Salad", 11.00, "Appetizer", false));
+	(this->menuItems).push_back(Food("Soup of the Day", 3.00, "Appetizer", true));
 
 
-	int size = sizeof(foods);
+	//Entrees
+	(this->menuItems).push_back(Food("Hamburger", 7.00, "Entree", false));
+	(this->menuItems).push_back(Food("Cheeseburger", 7.50, "Entree", false));
+	(this->menuItems).push_back(Food("Tilapia", 12.00, "Entree", true));
+	(this->menuItems).push_back(Food("Chicken Wings (6)", 7.00, "Entree", false));
+	(this->menuItems).push_back(Food("Steak", 13.00, "Entree", false));
+	(this->menuItems).push_back(Food("Sushi Sampler", 14.00, "Entree", false));
+	(this->menuItems).push_back(Food("Pizza", 9.00, "Entree", false));
+	(this->menuItems).push_back(Food("Special Quesadilla", 12.00, "Entree", true));
 
-	for (int i = 0; i < size; i++)
-		this->menuItems[i] = foods[i];
+	//Desserts
+	(this->menuItems).push_back(Food("Chocolate Ice Cream", 3.00, "Dessert", false));
+	(this->menuItems).push_back(Food("Vanilla Ice Cream", 3.00, "Dessert", false));
+
+	//Sides
+	(this->menuItems).push_back(Food("French Fries", 2.00, "Side", false));
+	(this->menuItems).push_back(Food("Onion Rings", 2.50, "Side", true));
 }
 
-/* Updates budget for the entire program by accesing other class	 	*/
-double Menu::updateBudget()
+
+void Menu::printMenu()
 {
-	int oldBudget = 0.0;
+	std::cout << "\n\n================================================================================" << endl;
+	std::cout << "\tMENU\n===============================================================================\n\n";
 
-	// oldBudget = getBudget();			-  call super function
+	int entrees = 0;
+	int appetizers = 0;
+	int desserts = 0;
+	int sides = 0;
+	int other = 0;
+
+	for (unsigned int i = 0; i < this->menuItems.size(); i++)
+	{
+		if (this->menuItems[i].getFoodType() == "Entree")
+		{
+			entrees++;
+		}
+
+		else if (this->menuItems[i].getFoodType() == "Appetizer")
+		{
+			appetizers++;
+		}
+
+		else if (this->menuItems[i].getFoodType() == "Dessert")
+		{
+			desserts++;
+		}
+
+		else if (this->menuItems[i].getFoodType() == "Side")
+		{
+			sides++;
+		}
+
+		else
+			other++;
+	}
+
+	std::cout << "-------------------------------------------------\n";
+	cout<< "Appetizers:\n" << endl;
+	for (int k = 0; k < appetizers; k++)
+	{
+		std::cout<< "|" << k+1 << "|\t" << menuItems[k].getName() << "\t" << endl;
+	}
+
+	std::cout << "\n\n-------------------------------------------------\n\n";
+	cout<< "Entrees:\n" << endl;
+	for (int j = 0; j < entrees; j++)
+	{
+		std::cout<< "|" << j+1 << "|\t" << menuItems[j+appetizers].getName() << "\t\t" << endl;
+	}
+
+	std::cout << "\n\n-------------------------------------------------\n\n";
+	cout<< "Desserts:\n" << endl;
+	for (int a = 0; a < desserts; a++)
+	{
+		std::cout<< "|" << a+1 << "|\t" << menuItems[a+appetizers+entrees].getName() << "\t"<< endl;
+	}
+
+	std::cout << "\n\n-------------------------------------------------\n\n";
+	cout<< "Sides:\n" << endl;
+	for (int b = 0; b < sides; b++)
+	{
+		std::cout<< "|" << b+1 << "|\t" << menuItems[b+appetizers+entrees+desserts].getName() << "\t\t"<< endl;
+	}
+
+	if (other != 0)
+		std::cout << "\n\nERROR - FOOD ITEM WITH BAD TYPE\n\n";
+	std::cout << "\n-------------------------------------------------\n";
+	std::cout << "===============================================================================\n\n\n";
+
+	int numAppetizer = -99;
+	int numEntree = -99;
+	int numDessert = -99;
+	int numSide = -99;
+
+	while (numAppetizer <= 0 || numAppetizer > appetizers)
+	{
+		std::cout << "Please enter an Appetizer: ";
+		std::cin>> numAppetizer;
+
+		if (numAppetizer <= 0 || numAppetizer > appetizers)
+			std::cout<< "ERROR - Invalid input!" << endl;
+	}
+
+	while (numEntree <= 0 || numEntree > entrees)
+	{
+		std::cout << "Please enter an Entree: ";
+		std::cin>> numEntree;
+
+		if (numEntree <= 0 || numEntree > entrees)
+			std::cout<< "ERROR - Invalid input!" << endl;
+	}
+
+	while (numDessert <= 0 || numDessert > desserts)
+	{
+		std::cout << "Please enter a Dessert: ";
+		std::cin>> numDessert;
+
+		if (numDessert <= 0 || numDessert > desserts)
+			std::cout<< "ERROR - Invalid input!" << endl;
+	}
+
+	while (numSide <= 0 || numSide > sides)
+	{
+		std::cout << "Please enter a Side: ";
+		std::cin>> numSide;
+
+		if (numSide <= 0 || numSide > sides)
+			std::cout<< "ERROR - Invalid input!" << endl;
+	}
 
 
-	return oldBudget;
+	this->chosenAppetizer = this->menuItems[numAppetizer - 1];
+	this->chosenEntree = this->menuItems[numEntree + numAppetizer - 2];
+	this->chosenDessert = this->menuItems[numEntree + numAppetizer + numDessert - 3];
+	this->chosenSide = this->menuItems[numEntree + numAppetizer + numDessert + numSide - 4];
 
+	std::cout<< "\n\n--- All data successfully entered! --- " << endl ;
+	std::cout<< "You requested:\n" << endl;
+
+	std::cout<< "\nAppetizer: " << (this->menuItems[numAppetizer - 1]).getName() << endl;
+	std::cout<< "\nEntree: " << (this->menuItems[numEntree + appetizers - 1].getName()) << endl;
+	std::cout<< "\nDessert: " << (this->menuItems[entrees + appetizers + numDessert - 1].getName()) << endl;
+	std::cout<< "\nSide: " << (this->menuItems[entrees + appetizers + desserts + numSide - 1].getName()) << endl;
+
+	std::cout << "\n\n===============================================================================\n\n\n";
 }
+
+
 
