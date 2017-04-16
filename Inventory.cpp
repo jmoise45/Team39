@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include "Inventory.h"
-#include <conio.h>
 
 Furniture::Furniture(string name, int amount)
 {
