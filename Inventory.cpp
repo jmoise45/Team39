@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include "Inventory.h"
+#include <conio.h>
+#include <math.h>
 
 Furniture::Furniture(string name, int amount)
 {
@@ -187,9 +189,7 @@ void Inventory::modify(int &choice)
 
         cout << "1.Quantity" << endl;
 
-        cout << "2.Total Price" << endl;
-
-        cout << "3.Description\n" << endl;
+        cout << "2.Description\n" << endl;
 
         cin >> choice2;
 
@@ -235,38 +235,25 @@ void Inventory::modify(int &choice)
 
             cout << endl;
 
+            if(inventory[choice-1]->getName() == "Dining Table" || inventory[choice-1]->getName() == "Chair" ||
+            inventory[choice-1]->getName() == "Drapes" || inventory[choice-1]->getName() == "Lamp" ||
+            inventory[choice-1]->getName() == "Chandelier" || inventory[choice-1]->getName() == "Luxury Couch")
+            {
+
+                price = 0;
+
+            }
+
+            else {
+
+                price = 100*quantity;
+            }
+
+            inventory[choice-1]->setPrice(price);
             inventory[choice-1]->setAmount(quantity);
         }
 
         else if(choice2 == 2)
-        {
-
-            cout << "Total Price: ";
-
-            cin >> price;
-
-            if(cin.fail())
-            {
-
-                cout << endl;
-
-                cerr << "Invalid input." << endl;
-
-                cout << endl;
-
-                cin.clear();
-
-                cin.ignore(256,'\n');
-
-                return;
-            }
-
-            cout << endl;
-
-            inventory[choice-1]->setPrice(price);
-        }
-
-        else if(choice2 == 3)
         {
             string dum;
 
@@ -316,6 +303,10 @@ int main()
 
     bool control = true;
 
+    int numOfGuests = 64;
+
+    bool furnitureIsSelected = false;
+
     while(c == true) {
 
         cout << "What would you like to add to your inventory?" << endl;
@@ -333,13 +324,11 @@ int main()
 
         if(d == "1") {
 
-            string name = "Dining Table";
+            string name = "Dining Table (for 8 people) ";
 
-            int amount;
+            int amount = (ceil(numOfGuests) / 8);
 
-            cout << "Quantity: ";
-
-            cin >> amount;
+            cout << "Quantity: " << amount << endl;
 
             if(cin.fail()) {
 
@@ -367,11 +356,9 @@ int main()
 
             string name = "Chair";
 
-            int amount;
+            int amount = numOfGuests;
 
-            cout << "Quantity: ";
-
-            cin >> amount;
+            cout << "Quantity: " << amount << endl;;
 
             if(cin.fail()) {
 
@@ -587,7 +574,11 @@ int main()
 
             cout << endl;
 
+            double price = amount*100;
+
             Furniture *furn = new Furniture(name, amount);
+
+            furn->setPrice(price);
 
             in->addFurniture(furn);
         }
@@ -667,6 +658,8 @@ int main()
         {
 
             control = false;
+
+            furnitureIsSelected = true;
         }
 
         else
