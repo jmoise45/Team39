@@ -16,7 +16,7 @@ void invitationCard(){
 
     ofstream f;
 
-    f.open("Party.txt", ofstream::out | ofstream::trunc);
+    f.open("Invitation.txt", ofstream::out | ofstream::trunc);
 
     cout << endl;
 
