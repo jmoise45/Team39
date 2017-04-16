@@ -1,5 +1,7 @@
 #include <iostream>
+#include <fstream>
 #include "Inventory.h"
+#include <conio.h>
 
 Furniture::Furniture(string name, int amount)
 {
@@ -123,11 +125,11 @@ void Inventory::printFurnitureDetail()
 
             cout << (i+1) << ". " << inventory[i]->getName() << endl;
 
-            cout << "  (a) Quantity: " << inventory[i]->getAmount() << endl;
+            cout << "  (i) Quantity: " << inventory[i]->getAmount() << endl;
 
-            cout << "  (b) Total Price: " << inventory[i]->getPrice() << endl;
+            cout << "  (ii) Total Price: " << inventory[i]->getPrice() << endl;
 
-            cout << "  (c) Description: " << inventory[i]->getDescription() << endl;
+            cout << "  (iii) Description: " << inventory[i]->getDescription() << endl;
         }
 
         cout << endl;
@@ -288,13 +290,258 @@ void Inventory::modify(int &choice)
     }
 }
 
+double Inventory::currencyTotal() {
+
+    double sum = 0;
+
+    if(inventory.size() != 0)
+    {
+        for(unsigned int i = 0; i < inventory.size(); i++)
+        {
+            sum += inventory[i]->getPrice();
+        }
+    }
+
+    return sum;
+}
+
 int main()
 {
     Inventory *in = new Inventory();
 
+    string d;
+
     string n;
 
+    bool c = true;
+
     bool control = true;
+
+    while(c == true) {
+
+        cout << "What would you like to add to your inventory?" << endl;
+        cout << endl;
+        cout << "1. Dining Table" << endl;
+        cout << "2. Chair" << endl;
+        cout << "3. Drapes" << endl;
+        cout << "4. Lamp" << endl;
+        cout << "5. Chandelier" << endl;
+        cout << "6. Luxury Couch" << endl;
+        cout << "7. None of these" << endl;
+        cout << "8. Done adding" << endl;
+        cin >> d;
+        cout << endl;
+
+        if(d == "1") {
+
+            string name = "Dining Table";
+
+            int amount;
+
+            cout << "Quantity: ";
+
+            cin >> amount;
+
+            if(cin.fail()) {
+
+                cout << endl;
+
+                cerr << "Invalid input." << endl;
+
+                cout << endl;
+
+                cin.clear();
+
+                cin.ignore(256,'\n');
+
+                continue;
+            }
+
+            cout << endl;
+
+            Furniture *furn = new Furniture(name, amount);
+
+            in->addFurniture(furn);
+        }
+
+        else if(d=="2") {
+
+            string name = "Chair";
+
+            int amount;
+
+            cout << "Quantity: ";
+
+            cin >> amount;
+
+            if(cin.fail()) {
+
+                cout << endl;
+
+                cerr << "Invalid input." << endl;
+
+                cout << endl;
+
+                cin.clear();
+
+                cin.ignore(256,'\n');
+
+                continue;
+            }
+
+            cout << endl;
+
+            Furniture *furn = new Furniture(name, amount);
+
+            in->addFurniture(furn);
+        }
+
+        else if(d=="3") {
+
+            string name = "Drapes";
+
+            int amount;
+
+            cout << "Quantity: ";
+
+            cin >> amount;
+
+            if(cin.fail()) {
+
+                cout << endl;
+
+                cerr << "Invalid input." << endl;
+
+                cout << endl;
+
+                cin.clear();
+
+                cin.ignore(256,'\n');
+
+                continue;
+            }
+
+            cout << endl;
+
+            Furniture *furn = new Furniture(name, amount);
+
+            in->addFurniture(furn);
+        }
+
+        else if(d == "4") {
+
+            string name = "Lamp";
+
+            int amount;
+
+            cout << "Quantity: ";
+
+            cin >> amount;
+
+            if(cin.fail()) {
+
+                cout << endl;
+
+                cerr << "Invalid input." << endl;
+
+                cout << endl;
+
+                cin.clear();
+
+                cin.ignore(256,'\n');
+
+                continue;
+            }
+
+            cout << endl;
+
+            Furniture *furn = new Furniture(name, amount);
+
+            in->addFurniture(furn);
+        }
+
+        else if(d=="5") {
+
+            string name = "Chandelier";
+
+            int amount;
+
+            cout << "Quantity: ";
+
+            cin >> amount;
+
+            if(cin.fail()) {
+
+                cout << endl;
+
+                cerr << "Invalid input." << endl;
+
+                cout << endl;
+
+                cin.clear();
+
+                cin.ignore(256,'\n');
+
+                continue;
+            }
+
+            cout << endl;
+
+            Furniture *furn = new Furniture(name, amount);
+
+            in->addFurniture(furn);
+        }
+
+        else if(d=="6") {
+
+            string name = "Luxury Couch";
+
+            int amount;
+
+            cout << "Quantity: ";
+
+            cin >> amount;
+
+            if(cin.fail()) {
+
+                cout << endl;
+
+                cerr << "Invalid input." << endl;
+
+                cout << endl;
+
+                cin.clear();
+
+                cin.ignore(256,'\n');
+
+                continue;
+            }
+
+            cout << endl;
+
+            Furniture *furn = new Furniture(name, amount);
+
+            in->addFurniture(furn);
+        }
+
+        else if(d=="7") {
+
+            c = false;
+        }
+
+        else if(d=="8") {
+
+            c = false;
+        }
+
+        else
+        {
+            cout << "Invalid input, try again.\n" << endl;
+
+            cin.clear();
+        }
+
+    }
 
     while(control == true)
     {
@@ -302,7 +549,8 @@ int main()
         cout << "2.Remove Furniture" << endl;
         cout << "3.Print Furniture Detail" << endl;
         cout << "4.Modify Furniture Detail" << endl;
-        cout << "5.Exit\n" << endl;
+        cout << "5.Total Cost of Items" << endl;
+        cout << "6.Exit\n" << endl;
         cin >> n;
         cout << endl;
 
@@ -407,7 +655,16 @@ int main()
             }
         }
 
-        else if (n == "5")
+        else if(n == "5") {
+
+            double cost = in->currencyTotal();
+
+            cout << "Total: " << cost << endl;
+
+            cout << endl;
+        }
+
+        else if (n == "6")
         {
 
             control = false;
@@ -421,5 +678,6 @@ int main()
             cin.clear();
         }
     }
+
     return 0;
 }
