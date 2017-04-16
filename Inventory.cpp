@@ -357,7 +357,7 @@ int main()
 
             int amount = numOfGuests;
 
-            cout << "Quantity: " << amount << endl;;
+            cout << "Quantity: " << amount << endl;
 
             if(cin.fail()) {
 
