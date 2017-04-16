@@ -1,61 +1,49 @@
 #include <iostream>
 #include <string>
+#include "Person.h"
 using namespace std;
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
-}
 
-class Staff:public Person {
-    Staff(string name, int age, bool isGuest, string jobTitle, double cost);
+class Staff: public Person {
 public:
-    string name;
-    int age;
-    string jobTitle;
-    double cost;
-private:
-    string getName();
+    Staff(string name, int age, string jobTitle, double hireCost);
+    void setAge(int age);
+    void setJobTitle(string jobTitle);
+    void setHireCost(double hireCost);
     int getAge();
     string getJobTitle();
-    double getCost();
-    bool isGuest();
-    int numStaff();
-    int numBartender();
-    void printStaff();
+    double getHireCost();
+};
+
+//Staff methods
+
+Staff::Staff(string name, int age, string jobTitle, double hireCost){
+    this->age = age;
+    this->name = name;
+    this->jobTitle = jobTitle;
+    this->hireCost = hireCost;
 }
 
-string getName() {
-    return name;
+void Staff::setAge(int age) {
+    this->age = age;
 }
 
-int getAge() {
+void Staff::setJobTitle(string jobTitle) {
+    this->jobTitle = jobTitle;
+}
+
+void Staff::setHireCost(double hireCost) {
+    this->hireCost = hireCost;
+}
+
+int Staff::getAge() {
     return age;
 }
 
-string getJobTitle() {
+string Staff::getJobTitle() {
     return jobTitle;
 }
 
-double getCost() {
-    return cost;
+double Staff::getHireCost() {
+    return hireCost;
 }
 
-bool isGuest() {
-    return isGuest;
-}
-
-int numStaff() {
-    return numStaff;
-}
-
-int numBartender() {
-    return numBartender;
-}
-
-void printStaff() {
-    cout << "Number of staff: " << numStaff();
-    cout << "\nNumber of bartenders: " << numBartender();
-}
-
-
-;
