@@ -37,6 +37,7 @@ public:
     void printFurnitureDetail();
     void printFurnitureNames();
     void modify(int &choice);
+    double currencyTotal();
 };
 
 
