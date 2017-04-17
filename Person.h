@@ -1,12 +1,15 @@
 #ifndef PERSON_H
 #define PERSON_H
 #include <string>
+#include <vector>
+using namespace std;
 
 class Person
 {
     public:
-        void setName(std::string name);
+        void setName(std::string &name);
         std::string getName();
+        int getAge();
     protected:
         std::string name;
         int age;
@@ -18,9 +21,9 @@ class Person
 class Guest: public Person
 {
     public:
-        Guest(std::string name, int age);
-        void setAge(int age);
-        void RSVP(bool coming);
+        Guest(std::string &name, int &age);
+        void setAge(int &age);
+        void RSVP(bool &coming);
         bool getRSVPStatus();
         int getAge();
 };
@@ -28,22 +31,14 @@ class Guest: public Person
 class personList
 {
     private:
-
-        struct node{
-            Person data;
-            node* next;
-        };
-
-        node* head;
-        node* curr;
-        node* temp;
-        node* tail;
+        vector<Person*> personlist;
 
     public:
         personList();
-        void addNode(Person data);
-        void deleteNode(std::string personName);
+        void addPerson(Person *person);
+        void deletePerson(std::string personName);
         void printList();
-        void fragments();
+        unsigned int getSize();
 };
+
 #endif // PERSON_H
