@@ -6,6 +6,11 @@
 
 using namespace std;
 
+/*
+ *  ==========================================================
+ * 		Furniture Class Declarations
+ * ==========================================================
+ 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 */
 class Furniture 
 {
     private:
@@ -30,6 +35,13 @@ class Furniture
         void setDescription(string &description);
 };
 
+
+
+/*
+ *  ==========================================================
+ * 		Inventory Class Declarations
+ * ==========================================================
+ 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 */
 class Inventory
 {
     private:
