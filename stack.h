@@ -31,10 +31,12 @@ class Node
 		/* 	Constructor	 	*/
 		Node(const string &value);
 
-		/* 	Accessor and Mutator Methods 	*/
+		/* 	Mutator Methods 	*/
 		Node * getNext();
-		void setNext(Node * newptr);
 		string getData();
+	
+		/* 	Accessor Method	 	*/
+		void setNext(Node * newptr);
 };
 
 
