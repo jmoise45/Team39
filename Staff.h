@@ -8,9 +8,9 @@
  *  ==========================================================
  * 		Staff Class Declarations
  * ==========================================================
- 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 */
+ 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	     	 */
 
-class Staff: public Person // Declares that 'Staff' implements 'Person'
+class Staff: public Person // Declares that 'Staff' class implements 'Person' class
 {
     public:
         /*      Constructor	        	*/
