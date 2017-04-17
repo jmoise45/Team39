@@ -1063,7 +1063,7 @@ void Inventory::printFurnitureNames()
         cout << "Empty\n" << endl;
     }
 }
-
+//This method is used to modify the information for a given furniture in the inventory (either Quantity or Description)
 void Inventory::modify(int &choice)
 {
 
@@ -1111,7 +1111,7 @@ void Inventory::modify(int &choice)
         }
 
         cout << endl;
-
+        //The quantity determines the price of the item if it is not free
         if (choice2 == 1)
         {
 
@@ -1135,7 +1135,8 @@ void Inventory::modify(int &choice)
             }
 
             cout << endl;
-
+		
+	    //Only assign a price to items that are not free in the inventory	
             if(inventory[choice-1]->getName() == "Dining Table" || inventory[choice-1]->getName() == "Chair" ||
                     inventory[choice-1]->getName() == "Drapes" || inventory[choice-1]->getName() == "Lamp" ||
                     inventory[choice-1]->getName() == "Chandelier" || inventory[choice-1]->getName() == "Luxury Couch")
@@ -1147,7 +1148,7 @@ void Inventory::modify(int &choice)
 
             else
             {
-
+                //Each item (that is not free) will get a price of $100     
                 price = 100*quantity;
             }
 
@@ -1157,10 +1158,6 @@ void Inventory::modify(int &choice)
 
         else if(choice2 == 2)
         {
-            string dum;
-
-            getline(cin, dum);
-
             cout << "Description: ";
 
             getline(cin, description);
@@ -1178,6 +1175,7 @@ void Inventory::modify(int &choice)
     }
 }
 
+//Get the total cost of inventory items
 double Inventory::currencyTotal()
 {
 
@@ -1204,18 +1202,27 @@ void makeItineraryFile(string partyName, string partyTime, string partyDate, int
 int main()
 {
 
-
+    //The total budget of the user
     double budget;
+    //This variable controls how much money has been spent on options in the checklist	
     double moneySpent = 0;
+    //This is the name of the file that will contain the first name of guests and their age
     string guestFileName;
     string choices[15];
     double priceOfChoices[15];
+    //This variable holds the number of hours of how long the party will go on
     int hoursOfParty;
+    //This variable controls how much money is left for the user to spend on options in the checklist
     double moneyLeft;
+    //This variable contains the date of the party
     string date;
+    //This variable contains the time that the party begins
     string time;
+    //This variable is used to calculate how much money is spent for a certain option
     double tempMoneySpent=0;
+    //This variable is used to calculate how much money is left after spending money on a certain option
     double tempMoneyLeft=0;
+    //The name of the party being held
     string partyName;
 
     cout << "Welcome to the Party Planner!" << endl;
@@ -1238,7 +1245,7 @@ int main()
     string s = " ";
     moneyLeft = budget;
     string filename = " ";
-
+    //This object will contain all the guests attending the party
     personList *guestList = new personList();
 
     cin >> filename;
@@ -1267,7 +1274,7 @@ int main()
         guestList->printList();
         unsigned int numOfGuests = guestList->getSize();
 
-        //take in guest names and ages and then put them into the guest list PersonList
+        //take in guest names and ages and then put them into the guest list personList
 
 
         //determine the number of staff needed for the event
@@ -1306,14 +1313,21 @@ int main()
         }
         //go into a loop to set the location, menu, furniture, and the entertainment
         int mainLoopChoice;
+	//Contains the amount of money used for entertainment
         double entertainmentPrice;
+	//This variable determines if the party checklist's sections are all complete(entertainment, furniture, etc.)
         bool partyIsSet = false;
+	//The chosen venue 
         int venueChoice;
+	//Contains the amount of money used for venue
         double venuePrice;
+	//The location of the venue
         string venueLocation;
+	//The name of the venue
         string venue;
         double foodPrice;
         double furniturePrice;
+	//The name of the entertainment group
         string entertainment;
         bool foodIsSelected = false;
         bool furnitureIsSelected = false;
@@ -1329,9 +1343,10 @@ int main()
             cout << "3) Furniture " << endl;
             cout << "4) Menu Items " << endl;
             cin >> mainLoopChoice;
-
+	    //Location
             if (mainLoopChoice == 1)
             {
+		//If the user has previously made a choice
                 if(locationIsSelected)
                 {
                     string selection;
@@ -1347,7 +1362,7 @@ int main()
                         venue = "";
                     }
                 }
-
+		//If user has not previously made a choice for the venue's location, i.e., this is the user's first time choosing
                 while(locationIsSelected == false)
                 {
                     int locationChoice;
@@ -1537,16 +1552,17 @@ int main()
 
                     }
                 }
-
+		//Prints out the user's budget status and expenses
                 printBudgetBreakdown(partyName, totalPriceOfStaff, budget, moneyLeft, moneySpent, venuePrice, entertainmentPrice, furniturePrice, foodPrice, locationIsSelected, entertainmentIsSelected, furnitureIsSelected, foodIsSelected);
 
             }
+	    //Entertainment
             else if (mainLoopChoice == 2)
             {
 
 
                 bool e = false;
-
+               //If the user has previously made a choice
                if(entertainmentIsSelected)
                 {
                     string selection;
@@ -1634,20 +1650,23 @@ int main()
                         }
                     }
                 }
+		 //Prints out the user's budget status and expenses
                  printBudgetBreakdown(partyName, totalPriceOfStaff, budget, moneyLeft, moneySpent,  venuePrice, entertainmentPrice, furniturePrice, foodPrice, locationIsSelected, entertainmentIsSelected, furnitureIsSelected, foodIsSelected);
             }
+            //Furniture
             else if (mainLoopChoice == 3)
             {
-
-
+		//Holds the choice from the first list
                 string d;
-
+		//Holds the choice from the second list
                 string n;
-
+		//control variable for the first while loop
                 bool c = true;
-
+		//control variable for the second while loop
                 bool control = true;
+		//This variable will contain the total cost of items in the inventory
                 double cost=0;
+		//The list in the while loop contains inventory items that are free of charge(offered by venues), i.e., all have price of $0
                 while(c == true)
                 {
 
@@ -1884,7 +1903,6 @@ int main()
                     }
 
                 }
-
                 while(control == true)
                 {
                     cout << "1.Add Furniture" << endl;
