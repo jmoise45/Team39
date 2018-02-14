@@ -1,0 +1,48 @@
+# depslib dependency file v1.0
+1492410012 source:c:\users\courtney\desktop\finalproject2\main.cpp
+	"Person.h"
+	"Staff.h"
+	"Inventory.h"
+	<iostream>
+	<fstream>
+	<math.h>
+	"food.h"
+	<string>
+	<vector>
+	"stack.h"
+	"menu.h"
+	"invitationCard.h"
+
+1492404714 c:\users\courtney\desktop\finalproject2\person.h
+	<string>
+	<vector>
+
+1492408795 c:\users\courtney\desktop\finalproject2\staff.h
+	<string>
+	<vector>
+	"Person.h"
+
+1492405934 c:\users\courtney\desktop\finalproject2\inventory.h
+	<string>
+	<vector>
+
+1492393074 c:\users\courtney\desktop\finalproject2\food.h
+	<iostream>
+	<string>
+	<vector>
+
+1492404806 c:\users\courtney\desktop\finalproject2\stack.h
+	<iostream>
+	<fstream>
+	<string>
+
+1492393074 c:\users\courtney\desktop\finalproject2\menu.h
+	<string>
+	<vector>
+	<iostream>
+	"stack.h"
+	"food.h"
+
+1492404775 c:\users\courtney\desktop\finalproject2\invitationcard.h
+	<cctype>
+
